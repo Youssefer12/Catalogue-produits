@@ -99,8 +99,7 @@ export default function Cart() {
                 <div>
                   <h4 style={{ margin: '0 0 5px 0' }}>{item.title}</h4>
                   <p style={{ margin: 0, color: '#007bff', fontWeight: 'bold' }}>
-                    {formatMAD(item.price)} x {item.quantity} ={' '}
-                    {formatMAD(item.price * item.quantity)}
+                    {formatMAD(item.price)} x {item.quantity}
                   </p>
                   <small style={{ color: '#666' }}>Stock disponible : {maxStock}</small>
                 </div>

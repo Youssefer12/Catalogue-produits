@@ -16,8 +16,18 @@ function readStoredList(key) {
   }
 }
 
+function readStoredCart() {
+  try {
+    const raw = sessionStorage.getItem(CART_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState(() => readStoredList(CART_STORAGE_KEY) || []);
+  const [cart, setCart] = useState(readStoredCart);
   const [products, setProducts] = useState(() => readStoredList(PRODUCTS_STORAGE_KEY) || []);
   const [loading, setLoading] = useState(() => {
     const stored = readStoredList(PRODUCTS_STORAGE_KEY);
@@ -60,7 +70,7 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     try {
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     } catch {
       // Ignore storage quota errors
     }

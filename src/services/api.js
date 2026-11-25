@@ -27,7 +27,10 @@ export function convertUsdToMad(usdPrice) {
 export function formatMAD(price) {
   const numeric = Number(price);
   if (!Number.isFinite(numeric)) return '0 MAD';
-  return `${numeric.toLocaleString('fr-MA')} MAD`;
+  const formatted = Math.round(numeric)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return `${formatted} MAD`;
 }
 
 function normalizeProduct(product) {
